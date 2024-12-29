@@ -4,14 +4,16 @@ phases:
     commands:
       - echo "criando pasta de build da layer"
       - mkdir googleapis_layers
-      - cp functions.js ./googleapis_layers/functions.js
-      - cp package-lock.json ./googleapis_layers/package-lock.json
-      - cp package.json ./googleapis_layers/package.json
-      - cd googleapis_layers
+      - mkdir googleapis_layers/nodejs
+      - cp functions.js ./googleapis_layers/nodejs/functions.js
+      - cp package-lock.json ./googleapis_layers/nodejs/package-lock.json
+      - cp package.json ./googleapis_layers/nodejs/package.json
+      - cd googleapis_layers/nodejs
       - npm install
   build:
     commands:
       - echo "faz o build da lambda"
+      - cd ..
       - zip -r googleapis_layers.zip .
       - ls
 artifacts:
