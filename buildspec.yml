@@ -12,7 +12,6 @@ phases:
   build:
     commands:
       - echo "faz o build da lambda"
-      - cd googleapis_layers
       - zip -r googleapis_layers.zip .
       - ls
 artifacts:
