@@ -1,0 +1,18 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - echo "criando pasta de build da layer"
+      - mkdir googleapis_layers
+      - cp functions.js ./googleapis_layers/functions.js
+      - cp package-lock.json ./googleapis_layers/package-lock.json
+      - cp package.json ./googleapis_layers/package.json
+
+      - echo "faz o build da lambda"
+      - cd googleapis_layers
+      - zip -r googleapis_layers.zip .
+  build:
+    commands:
+      - echo "faz o build da lambda"
+artifacts:
+  discard-paths: yes
