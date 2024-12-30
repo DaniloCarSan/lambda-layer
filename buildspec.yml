@@ -3,18 +3,18 @@ phases:
   pre_build:
     commands:
       - echo "criando pasta de build da layer"
-      - mkdir googleapis_layers
-      - mkdir googleapis_layers/nodejs
-      - cp functions.js ./googleapis_layers/nodejs/functions.js
-      - cp package-lock.json ./googleapis_layers/nodejs/package-lock.json
-      - cp package.json ./googleapis_layers/nodejs/package.json
-      - cd googleapis_layers/nodejs
+      - mkdir gmail-lambda-layer
+      - mkdir gmail-lambda-layer/nodejs
+      - cp functions.js ./gmail-lambda-layer/nodejs/functions.js
+      - cp package-lock.json ./gmail-lambda-layer/nodejs/package-lock.json
+      - cp package.json ./gmail-lambda-layer/nodejs/package.json
+      - cd gmail-lambda-layer/nodejs
       - npm install
   build:
     commands:
       - echo "faz o build da lambda"
       - cd ..
-      - zip -r googleapis_layers.zip .
-      - ls
+      - zip -r gmail-lambda-layer.zip .
+      - aws lambda publish-layer-version --layer-name $LAMBDA_LAYER_NAME --zip-file fileb://gmail-lambda-layer.zip --compatible-runtimes $LAMBDA_LAYER_RUNTIME
 artifacts:
   discard-paths: yes
